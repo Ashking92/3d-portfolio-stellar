@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Menu, X } from 'lucide-react';
+import { Download, Menu, X, Github, Instagram } from 'lucide-react';
 import { Button } from './ui/button';
 
 const Navigation = () => {
@@ -40,12 +40,21 @@ const Navigation = () => {
           <a href="#experience" className="nav-link">Experience</a>
           <a href="#projects" className="nav-link">Projects</a>
           <a href="#contact" className="nav-link">Contact</a>
-          <Button asChild variant="outline" size="sm" className="ml-4 border-portfolio-light-blue text-portfolio-light-blue hover:bg-portfolio-light-blue/20">
-            <a href="#" download>
-              <Download className="mr-2 h-4 w-4" />
-              Resume
+          
+          <div className="flex items-center gap-4 ml-4">
+            <a href="https://github.com/Ashking92" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
+              <Github size={20} />
             </a>
-          </Button>
+            <a href="https://instagram.com/theitsash" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
+              <Instagram size={20} />
+            </a>
+            <Button asChild variant="outline" size="sm" className="border-portfolio-light-blue text-portfolio-light-blue hover:bg-portfolio-light-blue/20">
+              <a href="#" download>
+                <Download className="mr-2 h-4 w-4" />
+                Resume
+              </a>
+            </Button>
+          </div>
         </nav>
 
         {/* Mobile Navigation Toggle */}
@@ -71,6 +80,16 @@ const Navigation = () => {
               <a href="#experience" className="nav-link" onClick={() => setIsOpen(false)}>Experience</a>
               <a href="#projects" className="nav-link" onClick={() => setIsOpen(false)}>Projects</a>
               <a href="#contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</a>
+              
+              <div className="flex items-center gap-4 mt-4">
+                <a href="https://github.com/Ashking92" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
+                  <Github size={20} />
+                </a>
+                <a href="https://instagram.com/theitsash" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
+                  <Instagram size={20} />
+                </a>
+              </div>
+              
               <Button asChild variant="outline" className="mt-6 border-portfolio-light-blue text-portfolio-light-blue hover:bg-portfolio-light-blue/20">
                 <a href="#" download>
                   <Download className="mr-2 h-4 w-4" />
