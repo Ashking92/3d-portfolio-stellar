@@ -1,12 +1,14 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Menu, X, Github, Instagram } from 'lucide-react';
+import { Download, Menu, X, Github, Instagram, Moon, Sun } from 'lucide-react';
 import { Button } from './ui/button';
+import { useTheme } from './ThemeProvider';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,18 +22,22 @@ const Navigation = () => {
     };
   }, []);
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-portfolio-navy/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-portfolio-navy/90 backdrop-blur-md shadow-lg dark:bg-portfolio-dark-blue/90' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <a href="#" className="text-xl md:text-2xl font-bold font-space gradient-text">
-          Yash<span className="text-portfolio-white">.</span>
+          Yash<span className="text-portfolio-white dark:text-portfolio-white">.</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -42,6 +48,19 @@ const Navigation = () => {
           <a href="#contact" className="nav-link">Contact</a>
           
           <div className="flex items-center gap-4 ml-4">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={toggleTheme}
+              className="rounded-full p-0 h-9 w-9 text-portfolio-gray hover:text-portfolio-light-blue hover:bg-portfolio-light-blue/10"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun size={18} className="text-portfolio-light-orange" />
+              ) : (
+                <Moon size={18} className="text-portfolio-light-blue" />
+              )}
+            </Button>
             <a href="https://github.com/Ashking92" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
               <Github size={20} />
             </a>
@@ -82,6 +101,19 @@ const Navigation = () => {
               <a href="#contact" className="nav-link" onClick={() => setIsOpen(false)}>Contact</a>
               
               <div className="flex items-center gap-4 mt-4">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={toggleTheme}
+                  className="rounded-full p-0 h-9 w-9 text-portfolio-gray hover:text-portfolio-light-blue hover:bg-portfolio-light-blue/10"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <Sun size={18} className="text-portfolio-light-orange" />
+                  ) : (
+                    <Moon size={18} className="text-portfolio-light-blue" />
+                  )}
+                </Button>
                 <a href="https://github.com/Ashking92" target="_blank" rel="noopener noreferrer" className="text-portfolio-gray hover:text-portfolio-light-blue transition-colors duration-300">
                   <Github size={20} />
                 </a>

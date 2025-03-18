@@ -73,7 +73,7 @@
   }
 
   body {
-    @apply bg-portfolio-navy text-portfolio-white font-poppins;
+    @apply bg-portfolio-navy text-portfolio-white font-poppins dark:bg-portfolio-dark-blue;
     overflow-x: hidden;
   }
 
@@ -96,7 +96,7 @@
   }
 
   .project-card {
-    @apply relative overflow-hidden rounded-lg border border-portfolio-teal bg-portfolio-dark-blue/50 p-5 transition-all duration-300 hover:shadow-lg hover:shadow-portfolio-light-blue/20 backdrop-blur-sm;
+    @apply relative overflow-hidden rounded-lg border border-portfolio-teal bg-portfolio-dark-blue/50 p-5 transition-all duration-300 hover:shadow-lg hover:shadow-portfolio-light-blue/20 backdrop-blur-sm dark:bg-portfolio-navy/50 dark:border-portfolio-light-blue/30;
   }
 
   .glow-effect {
