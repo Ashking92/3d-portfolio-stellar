@@ -1,6 +1,7 @@
 
 import { motion } from 'framer-motion';
 import HeroScene from './HeroScene';
+import WorkingDeveloper from './WorkingDeveloper';
 import { Button } from './ui/button';
 import { ChevronDown } from 'lucide-react';
 
@@ -66,6 +67,9 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* Working Developer character */}
+      <WorkingDeveloper />
       
       <motion.div
         initial={{ opacity: 0 }}
