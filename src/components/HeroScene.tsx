@@ -86,8 +86,8 @@ const FloatingMotorcycle = () => {
   return (
     <group ref={bikeRef} position={[3, 0, 0]} scale={0.6}>
       {/* Motorcycle Body */}
-      <mesh castShadow>
-        <cylinderGeometry args={[0.4, 0.4, 2, 16]} rotation={[Math.PI / 2, 0, 0]} />
+      <mesh castShadow rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.4, 0.4, 2, 16]} />
         <meshStandardMaterial color="#111111" metalness={0.8} roughness={0.2} />
       </mesh>
 
@@ -115,8 +115,8 @@ const FloatingMotorcycle = () => {
       </group>
 
       {/* Handlebar */}
-      <mesh position={[-1, 0.4, 0]} castShadow>
-        <cylinderGeometry args={[0.08, 0.08, 1, 16]} rotation={[0, 0, Math.PI / 2]} />
+      <mesh position={[-1, 0.4, 0]} castShadow rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.08, 0.08, 1, 16]} />
         <meshStandardMaterial color="#CCCCCC" metalness={0.6} roughness={0.3} />
       </mesh>
 
