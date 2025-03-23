@@ -92,7 +92,7 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-portfolio-light-blue to-portfolio-light-orange;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-portfolio-light-blue via-portfolio-light-blue to-portfolio-light-orange;
   }
 
   .project-card {
@@ -133,5 +133,51 @@
   
   .animate-float {
     animation: float 2s ease-in-out infinite;
+  }
+
+  /* New UI classes */
+  .glass-card {
+    @apply bg-portfolio-dark-blue/30 backdrop-blur-md border border-portfolio-teal/30;
+  }
+  
+  .highlight-gradient {
+    @apply bg-gradient-to-r from-portfolio-light-blue to-portfolio-light-orange;
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 163, 255, 0.3);
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+  
+  .button-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .button-glow::after {
+    @apply content-[''] absolute inset-0 rounded-md bg-white/10 opacity-0 transition-opacity duration-300;
+  }
+  
+  .button-glow:hover::after {
+    @apply opacity-100;
+  }
+  
+  .card-halo {
+    @apply relative;
+  }
+  
+  .card-halo::before {
+    @apply content-[''] absolute -inset-0.5 rounded-lg bg-gradient-to-r from-portfolio-light-blue to-portfolio-light-orange opacity-0 blur transition-opacity duration-300;
+    z-index: -1;
+  }
+  
+  .card-halo:hover::before {
+    @apply opacity-30;
   }
 }

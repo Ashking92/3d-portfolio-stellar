@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Card } from './ui/card';
 import { Github, ExternalLink, Code } from 'lucide-react';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card';
 
 const projectsData = [
   {
@@ -87,35 +89,66 @@ const Projects = () => {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="overflow-hidden h-full bg-portfolio-dark-blue/50 border-portfolio-teal hover:shadow-lg hover:shadow-portfolio-light-blue/20 transition-all duration-300">
+              <Card className="group overflow-hidden h-full bg-gradient-to-b from-portfolio-dark-blue/70 to-portfolio-navy/90 border-portfolio-teal hover:shadow-lg hover:shadow-portfolio-light-blue/30 transition-all duration-500">
                 <div className="relative overflow-hidden aspect-video">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-portfolio-dark-blue/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div className="p-4 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <div className="flex justify-between items-center">
+                        <HoverCard>
+                          <HoverCardTrigger asChild>
+                            <Button asChild variant="ghost" size="sm" className="text-portfolio-white/90 hover:text-portfolio-white">
+                              <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                                <Github size={16} />
+                              </a>
+                            </Button>
+                          </HoverCardTrigger>
+                          <HoverCardContent className="w-auto bg-portfolio-dark-blue border-portfolio-teal">
+                            <p className="text-portfolio-white">View Source Code</p>
+                          </HoverCardContent>
+                        </HoverCard>
+                        <HoverCard>
+                          <HoverCardTrigger asChild>
+                            <Button asChild variant="ghost" size="sm" className="text-portfolio-white/90 hover:text-portfolio-white">
+                              <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink size={16} />
+                              </a>
+                            </Button>
+                          </HoverCardTrigger>
+                          <HoverCardContent className="w-auto bg-portfolio-dark-blue border-portfolio-teal">
+                            <p className="text-portfolio-white">View Live Demo</p>
+                          </HoverCardContent>
+                        </HoverCard>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-portfolio-white mb-2">{project.title}</h3>
-                  <p className="text-portfolio-gray mb-4">{project.description}</p>
+                  <h3 className="text-xl font-bold text-portfolio-white mb-2 group-hover:text-portfolio-light-blue transition-colors duration-300">{project.title}</h3>
+                  <p className="text-portfolio-gray mb-4 line-clamp-3">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.map((tag, i) => (
-                      <span
+                      <Badge 
                         key={i}
-                        className="text-xs bg-portfolio-light-blue/20 text-portfolio-light-blue px-2 py-1 rounded-full"
+                        variant="outline"
+                        className="text-xs bg-portfolio-light-blue/10 text-portfolio-light-blue border-portfolio-light-blue/20 hover:bg-portfolio-light-blue/20"
                       >
                         {tag}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                   <div className="flex space-x-3 mt-4">
-                    <Button asChild variant="outline" size="sm" className="text-portfolio-light-blue border-portfolio-light-blue hover:bg-portfolio-light-blue/20">
+                    <Button asChild variant="outline" size="sm" className="w-1/2 text-portfolio-light-blue border-portfolio-light-blue hover:bg-portfolio-light-blue/20">
                       <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                         <Github size={16} className="mr-2" />
                         Code
                       </a>
                     </Button>
-                    <Button asChild size="sm" className="bg-portfolio-light-blue hover:bg-portfolio-blue">
+                    <Button asChild size="sm" className="w-1/2 bg-portfolio-light-blue hover:bg-portfolio-blue">
                       <a href={project.demoLink} target="_blank" rel="noopener noreferrer">
                         <ExternalLink size={16} className="mr-2" />
                         Demo
