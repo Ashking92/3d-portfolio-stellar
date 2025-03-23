@@ -6,7 +6,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useToast } from './ui/use-toast';
-import { Send } from 'lucide-react';
+import { Send, AlertCircle } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -17,30 +18,98 @@ const ContactForm = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      errors.name = 'Name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.subject.trim()) {
+      errors.subject = 'Subject is required';
+    }
+    
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear error when user types
+    if (formErrors[name]) {
+      setFormErrors(prev => {
+        const updated = { ...prev };
+        delete updated[name];
+        return updated;
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      toast({
+        title: "Form validation failed",
+        description: "Please check the form for errors",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      // Replace these values with your actual EmailJS service ID, template ID, and user ID
+      const serviceId = 'YOUR_SERVICE_ID';
+      const templateId = 'YOUR_TEMPLATE_ID';
+      const userId = 'YOUR_USER_ID';
+      
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+      
+      await emailjs.send(serviceId, templateId, templateParams, userId);
+      
       toast({
         title: "Message sent!",
         description: "Thanks for reaching out. I'll get back to you soon.",
       });
+      
+      // Reset form after successful submission
       setFormData({
         name: '',
         email: '',
         subject: '',
         message: '',
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      toast({
+        title: "Failed to send message",
+        description: "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,11 +132,19 @@ const ContactForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                required
-                className="bg-portfolio-navy border-portfolio-teal text-portfolio-white"
+                className={`bg-portfolio-navy border-portfolio-teal text-portfolio-white ${
+                  formErrors.name ? 'border-red-500' : ''
+                }`}
                 placeholder="Your name"
               />
+              {formErrors.name && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <AlertCircle className="h-4 w-4 mr-1" />
+                  {formErrors.name}
+                </p>
+              )}
             </div>
+            
             <div>
               <label htmlFor="email" className="block text-portfolio-light-gray mb-2">
                 Email
@@ -78,11 +155,19 @@ const ContactForm = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                required
-                className="bg-portfolio-navy border-portfolio-teal text-portfolio-white"
+                className={`bg-portfolio-navy border-portfolio-teal text-portfolio-white ${
+                  formErrors.email ? 'border-red-500' : ''
+                }`}
                 placeholder="Your email address"
               />
+              {formErrors.email && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <AlertCircle className="h-4 w-4 mr-1" />
+                  {formErrors.email}
+                </p>
+              )}
             </div>
+            
             <div>
               <label htmlFor="subject" className="block text-portfolio-light-gray mb-2">
                 Subject
@@ -92,11 +177,19 @@ const ContactForm = () => {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                required
-                className="bg-portfolio-navy border-portfolio-teal text-portfolio-white"
+                className={`bg-portfolio-navy border-portfolio-teal text-portfolio-white ${
+                  formErrors.subject ? 'border-red-500' : ''
+                }`}
                 placeholder="Subject of your message"
               />
+              {formErrors.subject && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <AlertCircle className="h-4 w-4 mr-1" />
+                  {formErrors.subject}
+                </p>
+              )}
             </div>
+            
             <div>
               <label htmlFor="message" className="block text-portfolio-light-gray mb-2">
                 Message
@@ -106,12 +199,20 @@ const ContactForm = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                required
-                className="bg-portfolio-navy border-portfolio-teal text-portfolio-white"
+                className={`bg-portfolio-navy border-portfolio-teal text-portfolio-white ${
+                  formErrors.message ? 'border-red-500' : ''
+                }`}
                 placeholder="Your message"
                 rows={5}
               />
+              {formErrors.message && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <AlertCircle className="h-4 w-4 mr-1" />
+                  {formErrors.message}
+                </p>
+              )}
             </div>
+            
             <Button
               type="submit"
               disabled={isSubmitting}
