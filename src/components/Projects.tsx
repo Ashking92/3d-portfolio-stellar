@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Card } from './ui/card';
-import { Github, ExternalLink, Code } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card';
@@ -10,7 +10,7 @@ const projectsData = [
     id: 1,
     title: "Deadpool Lab",
     description: "An immersive web experience showcasing Deadpool's world with interactive elements and stunning visuals.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+    image: "/lovable-uploads/505a3f33-1e91-493b-a01f-d58003dc7552.png",
     tags: ["Next.js", "Three.js", "Framer Motion", "Tailwind CSS"],
     githubLink: "https://github.com/yourusername/deadpool-lab",
     demoLink: "https://deadpool20.vercel.app",
@@ -19,7 +19,7 @@ const projectsData = [
     id: 2,
     title: "Relax Trader",
     description: "A comprehensive trading platform with real-time market data, advanced analytics, and portfolio management.",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+    image: "/lovable-uploads/1aa1748e-879c-4865-b982-7f7d97bb65f8.png",
     tags: ["React", "Redux", "TradingView API", "WebSocket"],
     githubLink: "https://github.com/yourusername/relax-trader",
     demoLink: "https://relaxtrader.com",
@@ -27,8 +27,8 @@ const projectsData = [
   {
     id: 3,
     title: "Ex Box",
-    description: "A modern gaming platform interface inspired by Xbox, featuring game library management and social features.",
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
+    description: "A modern web application for permanently storing and managing memories of past relationships.",
+    image: "/lovable-uploads/1510f6c4-75e6-48a6-ba05-288a4bce6d38.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase"],
     githubLink: "https://github.com/yourusername/ex-box",
     demoLink: "https://ex-box-reborn.vercel.app",
@@ -37,28 +37,10 @@ const projectsData = [
     id: 4,
     title: "Promptopia",
     description: "A prompt-sharing application for AI enthusiasts to discover, create and share creative prompts for AI models.",
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+    image: "/lovable-uploads/8754d33e-724f-4a45-93d3-c061c79e7b44.png",
     tags: ["Next.js", "MongoDB", "NextAuth", "Tailwind CSS"],
     githubLink: "https://github.com/Ashking92/promptopia",
     demoLink: "https://promptopia-ruby-eight.vercel.app/",
-  },
-  {
-    id: 5,
-    title: "Next Admin Dashboard",
-    description: "A modern admin dashboard built with Next.js featuring data visualization, user management, and analytics tools.",
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
-    tags: ["Next.js", "Chart.js", "MongoDB", "NextAuth"],
-    githubLink: "https://github.com/Ashking92/nextadmindashboard",
-    demoLink: "https://nextadmindashboard-ek5v.vercel.app/",
-  },
-  {
-    id: 6,
-    title: "Spotify Clone",
-    description: "A Spotify clone application featuring music streaming functionality, playlists, and user authentication.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-    tags: ["React", "Next.js", "Supabase", "Stripe"],
-    githubLink: "https://github.com/Ashking92/spotify-clone",
-    demoLink: "https://spotify-clone-sigma-ashen.vercel.app/",
   },
 ];
 
@@ -194,7 +176,7 @@ const Projects = () => {
               rel="noopener noreferrer"
               className="flex items-center"
             >
-              <Code className="mr-2 h-5 w-5" />
+              <Github className="mr-2 h-5 w-5" />
               View More Projects on GitHub
             </a>
           </Button>
